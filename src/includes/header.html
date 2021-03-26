@@ -1,0 +1,43 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/header.css' %}" defer />
+
+<header>
+	<link
+		rel="stylesheet"
+		href="{% static '/font-awesome/latest/css/all.min.css' %}"
+		defer
+	/>
+
+	<nav>
+        <a id="logo" href="/">VCS</a>
+		<a id="nav-toggle" href="#"><i class="fas fa-bars"></i></a>
+		<ul>
+			<li><a href="/about">About</a></li>
+			<li><a href="#">Contact</a></li>
+			{% if user.is_authenticated %}
+				<li><a href="#">Transact</a></li>
+                <li class="item button"><a href="/account">Account</a></li>
+                <li class="item button secondary"><a href="/logout">Log Out</a></li>
+            {% else %}
+                <li class="item button"><a href="/login">Log In</a></li>
+            {% endif %}
+		</ul>
+	</nav>
+
+	<script>
+		const toggle = document.querySelector('#nav-toggle')
+		const menu = document.querySelector('header>nav>ul')
+
+		/* Event Listener */
+		toggle.addEventListener('click', () => {
+			/* Toggle mobile menu */
+			if (menu.classList.contains('active'))
+				// adds the menu (hamburger) icon
+				toggle.querySelector('i').classList.replace('fa-times', 'fa-bars')
+			else
+				// adds the close (x) icon
+				toggle.querySelector('i').classList.replace('fa-bars', 'fa-times')
+			menu.classList.toggle('active')
+		}, false)
+	</script>
+</header>

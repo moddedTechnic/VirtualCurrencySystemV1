@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<link rel="stylesheet" href="{% static 'style/login.css' %}">
+	<form action="./" method="post">
+		<div id="username-input">
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username">
+		</div>
+		<div id="password-input">
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password">
+		</div>
+	</form>
+{% endblock content %}

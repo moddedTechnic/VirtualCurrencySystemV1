@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+header {
+  /* Tablet menu */
+  /* Desktop menu */
+}
+
+header nav {
+  background: #2f3640;
+  padding: .5vh 2.5vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+header nav ul {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header nav ul li {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  display: none;
+}
+
+header nav ul li a {
+  display: block;
+  padding: 15px 5px;
+}
+
+header nav ul li.button {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  padding: 9px 5px;
+}
+
+header nav ul li.button a {
+  border-radius: .5em;
+}
+
+header nav ul li.button.secondary {
+  /* divider between buttons and menu links */
+  border-bottom: 1px #353b48 solid;
+}
+
+header nav ul li:not(.button) a:hover,
+header nav ul li a:hover::after {
+  color: #dcdde1;
+}
+
+header nav ul.active li {
+  display: block;
+}
+
+header nav #nav-toggle {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  font-size: 20px;
+}
+
+header nav a {
+  color: #f5f6fa;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 7.5px 10px 7.5px 0;
+}
+
+header nav #logo {
+  font-family: "Kiwi Maru", Calibri, "Trebuchet MS", sans-serif;
+}
+
+@media all and (min-width: 700px) {
+  header nav ul {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  header nav ul li.button {
+    width: auto;
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    display: block;
+  }
+  header nav ul li.button a {
+    padding: 10px 15px;
+    margin: 5px 0;
+    background: #00a8ff;
+    border: 1px #0097e6 solid;
+  }
+  header nav ul li.button a:hover {
+    text-decoration: none;
+  }
+  header nav ul li.button.secondary {
+    border: 0;
+  }
+  header nav ul li.button.secondary a {
+    background: transparent;
+    border: 1px #00a8ff solid;
+  }
+  header nav ul li.button:not(.secondary) a:hover {
+    background: #0097e6;
+    border-color: #273c75;
+  }
+  header nav > :not(ul) {
+    margin-top: 2vh;
+  }
+  header nav #nav-toggle {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    text-align: right;
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+  header nav a {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+}
+
+@media all and (min-width: 960px) {
+  header nav ul {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    background: none;
+  }
+  header nav ul li {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    position: relative;
+    display: block;
+    width: auto;
+  }
+  header nav ul li.button {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+  header nav #nav-toggle {
+    display: none;
+  }
+  header nav a {
+    -webkit-box-ordinal-group: 1;
+        -ms-flex-order: 0;
+            order: 0;
+  }
+}
+/*# sourceMappingURL=header.css.map */
