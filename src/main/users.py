@@ -1,10 +1,10 @@
-from django.http.response import HttpResponse
 from django.urls import path
 
 from .views import renders, Title
 
 @renders('users/login.html')
 def log_in(request):
+    del request # unused
     return Title('Log In')
 
 app_name = 'users'

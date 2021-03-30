@@ -6,4 +6,4 @@ A Virtual Currency System which enables users to gain and trade a virtual curren
 - Freemium app virtual currency engagement
 - [Sequence Diagram](https://sequencediagram.org/)
 - [ClickUp](clickup.com)
-- Google Good Code
+- [Google Good Code](https://google.github.io/styleguide/pyguide.html)
