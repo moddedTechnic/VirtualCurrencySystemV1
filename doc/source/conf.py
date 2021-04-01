@@ -47,7 +47,7 @@ templates_path = [
 # for a list of supported languages.
 #
 # This is also used if you do content translation via gettext catalogs.
-# Usually you set "language" from the command line for these cases.
+# Usually you set 'language' from the command line for these cases.
 language = 'en-gb'
 
 # List of patterns, relative to source directory, that match files and
@@ -65,7 +65,7 @@ html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
+# so a file named 'default.css' will overwrite the builtin 'default.css'.
 html_static_path = [
     'static'
 ]
