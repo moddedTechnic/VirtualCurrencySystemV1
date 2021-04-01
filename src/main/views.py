@@ -1,4 +1,7 @@
 from functools import wraps
+from typing import Callable
+from django.core.handlers.wsgi import WSGIRequest
+from django.http.response import HttpResponse
 
 from django.shortcuts import render
 
@@ -27,13 +30,22 @@ class Title(Context):
         super().__init__(title=title)
 
 
-def renders(template_name):
-    def wrapper(func):
+def renders(template_name: str) -> Callable[
+        [Callable[[WSGIRequest], RenderData]],
+        Callable[[WSGIRequest], HttpResponse]
+    ]:
+    def wrapper(
+            func: Callable[[WSGIRequest], RenderData]
+        ) -> Callable[[WSGIRequest], HttpResponse]:
         @wraps(func)
-        def wrapped(request):
+        def wrapped(request: WSGIRequest) -> HttpResponse:
             render_data = func(request)
             render_data += Context(request=request, user=request.user)
-            return render(request, template_name=template_name, **render_data.dict())
+            return render(
+                request,
+                template_name=template_name,
+                **render_data.dict()
+            )
         return wrapped
     return wrapper
 
@@ -41,12 +53,12 @@ def renders(template_name):
 
 
 @renders('index.html')
-def index(request):
+def index(request: WSGIRequest) -> Title:
     del request  # unused
     return Title('Hello world')
 
 
 @renders('about.html')
-def about(request):
+def about(request: WSGIRequest) -> Title:
     del request  # unused
     return Title('About')

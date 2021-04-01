@@ -95,6 +95,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
+            #pylint: disable=line-too-long
             'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
