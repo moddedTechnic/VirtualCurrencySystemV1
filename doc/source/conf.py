@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 import django
-import sphinx_rtd_theme
+import sphinx_rtd_theme #pylint: disable=unused-import
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'VirtualCurrency.settings'
@@ -25,7 +25,7 @@ django.setup()
 # -- Project information -----------------------------------------------------
 
 project = 'Virtual Currency System'
-copyright = '2021, Jonathan Leeming'
+copyright = '2021, Jonathan Leeming' #pylint: disable=redefined-builtin
 author = 'Jonathan Leeming'
 
 
