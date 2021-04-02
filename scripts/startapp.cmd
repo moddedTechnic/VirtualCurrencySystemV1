@@ -1,3 +1,5 @@
 @echo off
 
-python src\manage.py startapp %1
+FOR %%x in (%*) DO (
+    python src\manage.py startapp %%x
+)
