@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'VirtualCurrency.urls'
+ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
