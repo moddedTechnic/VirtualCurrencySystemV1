@@ -41,7 +41,13 @@ def renders(template_name: str) -> Callable[
         @wraps(func)
         def wrapped(request: WSGIRequest) -> HttpResponse:
             render_data = func(request)
-            render_data += Context(request=request, user=request.user, load_service_worker=settings.LOAD_SERVICE_WORKER)
+            load_service_worker = (hasattr(settings, 'LOAD_SERVICE_WORKER')
+                and settings.LOAD_SERVICE_WORKER)
+            render_data += Context(
+                request=request,
+                user=request.user,
+                load_service_worker=load_service_worker
+            )
             return render(
                 request,
                 template_name=template_name,
