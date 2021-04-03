@@ -2,6 +2,7 @@ from functools import wraps
 from typing import Callable
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import HttpResponse
+from django.conf import settings
 
 from django.shortcuts import render
 
@@ -40,7 +41,7 @@ def renders(template_name: str) -> Callable[
         @wraps(func)
         def wrapped(request: WSGIRequest) -> HttpResponse:
             render_data = func(request)
-            render_data += Context(request=request, user=request.user)
+            render_data += Context(request=request, user=request.user, load_service_worker=settings.LOAD_SERVICE_WORKER)
             return render(
                 request,
                 template_name=template_name,

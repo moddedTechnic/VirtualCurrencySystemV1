@@ -18,5 +18,7 @@
         {% block content %}
         {% endblock content %}
     </main>
+
+    <script src="{% static 'scripts/service-worker/register.js' %}" data-service-worker="{{load_service_worker}}"></script>
 </body>
 </html>
