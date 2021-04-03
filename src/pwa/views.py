@@ -6,8 +6,6 @@ files
 
 from typing import Any
 
-from django.core.handlers.wsgi import WSGIRequest
-from django.http.response import Http404, HttpResponse
 from utils import serve
 
 from . import settings
@@ -24,13 +22,6 @@ def manifest():
         del manifest_data['filename']
 
     return serve.json(manifest_data)
-
-
-if settings.MANIFEST_FILE:
-    manifest = serve.static_file('manifest.json')
-else:
-    def manifest(request: WSGIRequest) -> HttpResponse:  # pylint: disable=function-redefined
-        raise Http404('Could not generate manifest')
 
 
 __all__ = ['manifest']
