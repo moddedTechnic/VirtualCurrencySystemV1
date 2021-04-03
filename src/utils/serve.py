@@ -2,8 +2,9 @@
 Utilities related to serving files
 '''
 
+from json import dumps
 from pathlib import Path
-from typing import Callable, Optional, Union
+from typing import Any, Callable, Optional, Union
 
 from django.conf import settings
 from django.core.handlers.wsgi import WSGIRequest
@@ -22,6 +23,8 @@ class _Result:
         if self:
             return self.ok
         raise self.err
+
+View = Callable[[WSGIRequest], HttpResponse]
 
 def _load_static_file(
     filename: Union[str, Path],
@@ -44,10 +47,16 @@ def _load_static_file(
 def static_file(
         filename: Union[str, Path],
         content_type: Optional[str] = None
-    ) -> Callable[[WSGIRequest], HttpResponse]:
+    ) -> View:
     result = _load_static_file(filename, content_type)
 
     return lambda _: result.get()
 
+def string(data: str, content_type: str = 'text/plain') -> View:
+    return lambda _: HttpResponse(data, content_type=content_type)
 
-__all__ = [ 'static_file' ]
+def json(data: dict[str, Any]):
+    return string(dumps(data), content_type='application/json')
+
+
+__all__ = [ 'static_file', 'string', 'json' ]
