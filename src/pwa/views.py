@@ -4,27 +4,33 @@ Mainly focuses on providing a function generator as PWA mostly serves static
 files
 '''
 
-from pathlib import Path
-from typing import Callable, Union
+from typing import Any
 
-from django.conf import settings
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import Http404, HttpResponse
+from utils import serve
+
+from . import settings
 
 
-def serve_static_file(
-        filename: Union[str, Path],
-        content_type: str = 'text/plain'
-    ) -> Callable[[WSGIRequest], HttpResponse]:
-    def wrapper(request: WSGIRequest) -> HttpResponse:
-        del request  # unused
-        for directory in settings.STATICFILES_DIRS:
-            fpath: Path = directory / filename
-            if fpath.exists():
-                with open(fpath, 'r') as f:
-                    return HttpResponse(f.read(), content_type=content_type)
-        raise Http404(f'Could not find {filename}')
-    return wrapper
+def manifest():
+    manifest_data: dict[str, Any] = settings.MANIFEST_DATA
+    if manifest_data['use_file']:
+        return serve.static_file(manifest_data['filename'])
+
+    if 'use_file' in manifest_data:
+        del manifest_data['use_file']
+    if 'filename' in manifest_data:
+        del manifest_data['filename']
+
+    return serve.json(manifest_data)
 
 
-__all__ = [ 'serve_static_file' ]
+if settings.MANIFEST_FILE:
+    manifest = serve.static_file('manifest.json')
+else:
+    def manifest(request: WSGIRequest) -> HttpResponse:  # pylint: disable=function-redefined
+        raise Http404('Could not generate manifest')
+
+
+__all__ = ['manifest']
