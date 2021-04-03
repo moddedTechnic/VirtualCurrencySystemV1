@@ -1,3 +1,7 @@
+'''
+Urls for the PWA app
+'''
+
 from django.urls import path
 
 from .views import serve_static_file
