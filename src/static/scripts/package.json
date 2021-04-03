@@ -1,0 +1,14 @@
+{
+	"name": "scripts",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Jonathan Leeming",
+	"license": "AGPL3",
+	"devDependencies": {
+		"eslint": "^7.23.0",
+		"eslint-config-google": "^0.14.0"
+	}
+}
