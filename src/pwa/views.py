@@ -1,6 +1,7 @@
 '''
-Views for the PWA app
-Mainly focuses on providing a function generator as PWA mostly serves static files
+Views for the PWA app.
+Mainly focuses on providing a function generator as PWA mostly serves static
+files
 '''
 
 from pathlib import Path
