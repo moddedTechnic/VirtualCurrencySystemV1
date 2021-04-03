@@ -12,4 +12,8 @@ urlpatterns = [
     path('manifest', serve.static_file('manifest.json')),
     path('robots.txt', serve.static_file('robots.txt')),
     path('robots', serve.static_file('robots.txt')),
+    path(
+        'service-worker.js', serve.static_file('scripts/service-worker/worker.js')),
+    path(
+        'service-worker', serve.static_file('scripts/service-worker/worker.js')),
 ]
