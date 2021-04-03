@@ -137,3 +137,21 @@ STATICFILES_DIRS = [
 ]
 
 LOAD_SERVICE_WORKER = False
+
+MANIFEST = True
+MANIFEST_DATA = {
+    'short_name': 'VCS',
+    'name': 'Virtual Currency System',
+    'icons': [],
+    'start_url': '/',
+    'background_color': '#ffffff',
+    'display': 'standalone',
+    'scope': '/',
+    'theme_color': '#ff0000',
+    'shortcuts': [],
+    'description': 'A virtual currency system',
+    'screenshots': [],
+    'use_file': False,
+}
+
+ROBOTS = True
