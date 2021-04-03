@@ -31,6 +31,7 @@ def _load_static_file(
         if fpath.exists():
             content_type = (
                 content_type or {
+                    'js': 'application/javascript',
                     'json': 'application/json',
                     'txt': 'text/plain',
                 }.get(fpath.suffix[1:], 'text/plain')
