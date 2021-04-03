@@ -14,7 +14,7 @@ app_name = 'main'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.pwa')),
+    path('', include('pwa.urls')),
     path('', include('main.users')),
     path('', views.index),
     path('about', views.about),
