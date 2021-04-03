@@ -2,12 +2,18 @@ from functools import wraps
 from typing import Callable
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import HttpResponse
-from django.conf import settings
 
 from django.shortcuts import render
 
+from pwa import settings as pwa_settings
+
 
 class RenderData:
+    '''
+    A class to store data about a template to be rendered
+    Stores:
+    - context
+    '''
     def __init__(self, *, context=None) -> None:
         self.context = context or {}
 
@@ -41,12 +47,10 @@ def renders(template_name: str) -> Callable[
         @wraps(func)
         def wrapped(request: WSGIRequest) -> HttpResponse:
             render_data = func(request)
-            load_service_worker = (hasattr(settings, 'LOAD_SERVICE_WORKER')
-                and settings.LOAD_SERVICE_WORKER)
             render_data += Context(
                 request=request,
                 user=request.user,
-                load_service_worker=load_service_worker
+                load_service_worker=pwa_settings.LOAD_SERVICE_WORKER
             )
             return render(
                 request,
