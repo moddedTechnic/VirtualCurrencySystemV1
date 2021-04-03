@@ -1,8 +1,10 @@
+'''
+The views to render the pages of the main app
+'''
+
 from django.core.handlers.wsgi import WSGIRequest
 
 from .utils import renders, Title
-
-# Create your views here.
 
 
 @renders('index.html')
