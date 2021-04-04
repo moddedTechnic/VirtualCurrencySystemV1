@@ -18,6 +18,8 @@ from pathlib import Path
 from django.core.management.commands import runserver
 from django.utils import autoreload
 
+from main import settings
+
 def _run_with_reloader(main_func, *args, **kwargs):
     signal.signal(signal.SIGTERM, lambda *args: sys.exit(0))
     try:
@@ -25,8 +27,8 @@ def _run_with_reloader(main_func, *args, **kwargs):
             reloader = autoreload.get_reloader()
             # reloader.watch_dir()
             path = Path(__file__).parent.parent.parent.parent / 'static'
-            reloader.watch_dir(path, '*.json')
-            reloader.watch_dir(path, '**/index.json')
+            for item in settings.RELOAD_ITEMS:
+                reloader.watch_dir(*item)
             autoreload.logger.info(
                 'Watching for file changes with %s', reloader.__class__.__name__
             )
