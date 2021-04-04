@@ -147,7 +147,7 @@ MANIFEST_DATA = {
     'background_color': '#ffffff',
     'display': 'standalone',
     'scope': '/',
-    'theme_color': '#ff0000',
+    'theme_color': '#0097e6',
     'shortcuts': [],
     'description': 'A virtual currency system',
     'screenshots': [],
