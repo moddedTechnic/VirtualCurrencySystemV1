@@ -8,6 +8,8 @@ MANIFEST = False
 MANIFEST_DATA = {
     'filename': 'manifest.json',
     'use_file': True,
+    'icons_path': '/icons',
+    'icons': [],
 }
 MANIFEST_FILE = False
 
