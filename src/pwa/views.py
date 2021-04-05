@@ -76,11 +76,18 @@ def manifest():
         return serve.static_file(manifest_data['filename'])
 
     def processor(item):
+        src: str = item['src']
+        path = src.strip('/')
+        path = path.strip('static')
+        path = path.strip('/')
+        path = Path(path)
+        print(path)
+
         if 'type' not in item:
-            item['type'] = static.mime_type(item['src'])
+            item['type'] = static.mime_type(src)
 
         if 'sizes' not in item:
-            img = Image.open(str(static.path(item['src'])))
+            img = Image.open(str(static.path(path).unwrap()))
             item['sizes'] = img.size
 
         sizes = item['sizes']
