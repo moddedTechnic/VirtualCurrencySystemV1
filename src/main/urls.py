@@ -16,6 +16,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pwa.urls')),
     path('', include('users.urls')),
+    path('static', include('main.static')),
     path('', views.index),
     path('about', views.about),
 ]
