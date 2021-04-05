@@ -10,6 +10,13 @@ MANIFEST_DATA = {
     'use_file': True,
     'icons_path': '/icons',
     'icons': [],
+    'start_url': '/',
+    'scope': '/',
+    'background_color': '#ffffff',
+    'theme_color': '#000000',
+    'display': 'standalone',
+    'shortcuts': [],
+    'screenshots': []
 }
 MANIFEST_FILE = False
 

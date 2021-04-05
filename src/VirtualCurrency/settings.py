@@ -143,14 +143,9 @@ MANIFEST_DATA = {
     'short_name': 'VCS',
     'name': 'Virtual Currency System',
     'icons': [],
-    'start_url': '/',
     'background_color': '#ffffff',
-    'display': 'standalone',
-    'scope': '/',
     'theme_color': '#0097e6',
-    'shortcuts': [],
     'description': 'A virtual currency system',
-    'screenshots': [],
     'use_file': False,
 }
 
