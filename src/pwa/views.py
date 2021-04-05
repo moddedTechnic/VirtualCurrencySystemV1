@@ -42,7 +42,7 @@ def _get_index_file(index_path: Union[str, Path]
     return Result(
         err=f'Could not find file ({index_path})').wrap_err(FileNotFoundError)
 
-def _load_array(manifest_data, arr_name):
+def _load_array(manifest_data, arr_name, processor=None):
     if (not manifest_data[arr_name] and
         manifest_data.get(f'{arr_name}_path', False)):
         try:
@@ -53,7 +53,12 @@ def _load_array(manifest_data, arr_name):
         else:
             suffix = icons_path.suffix
             if suffix == '.json':
-                manifest_data[arr_name] = load.json_file(icons_path).unwrap()
+                items = load.json_file(icons_path).unwrap()
+                if processor:
+                    manifest_data[arr_name] = [
+                        processor(item) for item in items]
+                else:
+                    manifest_data[arr_name] = items
             else:
                 print(
                     'Error loading manifest:'
@@ -67,8 +72,15 @@ def manifest():
     if manifest_data['use_file']:
         return serve.static_file(manifest_data['filename'])
 
-    manifest_data = _load_array(manifest_data, 'icons')
-    manifest_data = _load_array(manifest_data, 'screenshots')
+    def processor(item):
+        if 'type' not in item:
+            item['type'] = static.mime_type(item['src'])
+        return item
+
+
+    manifest_data = _load_array(manifest_data, 'icons', processor=processor)
+    manifest_data = _load_array(
+        manifest_data, 'screenshots', processor=processor)
 
     manifest_data = _strip_keys(
         manifest_data, 'use_file', 'filename', 'icons_path', 'screenshots_path')
