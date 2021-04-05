@@ -49,17 +49,17 @@ def _load_array(manifest_data, arr_name, processor=None):
     if (not manifest_data[arr_name] and
             manifest_data.get(f'{arr_name}_path', False)):
         try:
-            icons_path = _get_index_file(manifest_data[f'{arr_name}_path'])
-            icons_path = icons_path.unwrap()
+            path = _get_index_file(manifest_data[f'{arr_name}_path'])
+            path = path.unwrap()
         except FileNotFoundError as e:
             print('Error loading manifest:', e)
         else:
-            suffix = icons_path.suffix
+            suffix = path.suffix
             if suffix == '.json':
-                items = load.json_file(icons_path).unwrap()
+                items = load.json_file(path).unwrap()
                 if processor:
                     manifest_data[arr_name] = [
-                        processor(item) for item in items]
+                        processor(item, directory=path.parent) for item in items]
                 else:
                     manifest_data[arr_name] = items
             else:
@@ -75,11 +75,20 @@ def manifest():
     if manifest_data['use_file']:
         return serve.static_file(manifest_data['filename'])
 
-    def processor(item):
+    def processor(item, directory: Path, **_):
         if isinstance(item, str):
             item = {'src': item}
 
+        parts = directory.parts
+        idx = parts.index('static')
+        parts = parts[idx:]
+        directory = Path(*parts).as_posix()
+
         src: str = item['src']
+        if src.startswith('./'):
+            src = src[2:]
+            item['src'] = src = f'{directory}/{src}'
+
         path = src.strip('/')
         path = path.strip('static')
         path = path.strip('/')
