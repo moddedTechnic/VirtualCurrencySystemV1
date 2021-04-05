@@ -76,12 +76,14 @@ def manifest():
         return serve.static_file(manifest_data['filename'])
 
     def processor(item):
+        if isinstance(item, str):
+            item = {'src': item}
+
         src: str = item['src']
         path = src.strip('/')
         path = path.strip('static')
         path = path.strip('/')
         path = Path(path)
-        print(path)
 
         if 'type' not in item:
             item['type'] = static.mime_type(src)
