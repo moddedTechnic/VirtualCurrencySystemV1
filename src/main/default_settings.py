@@ -9,3 +9,11 @@ RELOAD_ITEMS = [
     (static_path, '*.json'),
     (static_path, '**/index.json')
 ]
+
+MIME_TYPES = {
+    'js': 'application/javascript',
+    'json': 'application/json',
+    'css': 'text/css',
+    'html': 'text/html',
+    'txt': 'text/plain',
+}
