@@ -13,7 +13,14 @@ RELOAD_ITEMS = [
 MIME_TYPES = {
     'js': 'application/javascript',
     'json': 'application/json',
+
     'css': 'text/css',
     'html': 'text/html',
     'txt': 'text/plain',
+
+    'png': 'image/png',
+
+    'ttf': 'font/ttf',
+    'woff': 'font/woff',
+    'woff2': 'font/woff2',
 }
