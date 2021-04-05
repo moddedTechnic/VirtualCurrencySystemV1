@@ -9,7 +9,7 @@ from typing import Any, Callable, Optional, Union
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import Http404, HttpResponse
 
-from . import load
+from . import load, static
 
 View = Callable[[WSGIRequest], HttpResponse]
 
@@ -20,13 +20,7 @@ def static_file(
     result = load.static_file(filename, content_type)
     result.wrap_err(Http404)
     result, fpath = result.unwrap()
-    content_type = (
-        content_type or {
-            'js': 'application/javascript',
-            'json': 'application/json',
-            'txt': 'text/plain',
-        }.get(fpath.suffix[1:], 'text/plain')
-    )
+    content_type = content_type or static.mime_type(fpath)
     result = HttpResponse(result, content_type=content_type)
     return lambda _: result
 
