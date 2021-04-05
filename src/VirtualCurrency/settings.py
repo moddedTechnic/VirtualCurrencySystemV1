@@ -142,7 +142,6 @@ MANIFEST = True
 MANIFEST_DATA = {
     'short_name': 'VCS',
     'name': 'Virtual Currency System',
-    'icons': [],
     'background_color': '#ffffff',
     'theme_color': '#0097e6',
     'description': 'A virtual currency system',
