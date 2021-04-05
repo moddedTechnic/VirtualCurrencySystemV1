@@ -2,6 +2,7 @@
 Utilities related to loading files
 '''
 
+import json
 from pathlib import Path
 from typing import Optional, Union
 
@@ -14,14 +15,28 @@ class Error(Exception):
 
 def static_file(
         filename: Union[str, Path],
-        content_type: Optional[str] = None):
+        content_type: Optional[str] = None) -> Result[tuple[str, Path, str], FileNotFoundError]:
     try:
         fpath: Path = static.path(filename).unwrap()
-    except Exception as e: #pylint: disable=broad-except
+    except FileNotFoundError as e:
         return Result(err=e)
     with fpath.open('r') as f:
         data = f.read()
     content_type = static.mime_type(fpath)
     return Result(ok=(data, fpath, content_type))
 
-__all__ = ['static_file']
+def json_file(filename: Union[str, Path]) -> Result[dict, FileNotFoundError]:
+    if isinstance(filename, str):
+        filename = filename.strip('/')
+    path = Path(filename)
+
+    if path.exists():
+        with path.open('r') as f:
+            return Result(ok=json.load(f))
+    try:
+        data, *_ = static_file(path).unwrap()
+    except FileNotFoundError as e:
+        return Result(err=e)
+    return Result(ok=json.load(data))
+
+__all__ = ['static_file', 'json_file']
