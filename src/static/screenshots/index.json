@@ -1,7 +1,3 @@
 [
-    {
-        "src": "/static/screenshots/001.png",
-        "type": "image/png",
-        "sizes": "2560x1333"
-    }
+    "/static/screenshots/001.png"
 ]
