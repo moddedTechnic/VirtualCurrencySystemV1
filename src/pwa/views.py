@@ -8,6 +8,8 @@ Provides:
 from pathlib import Path
 from typing import Any, Union
 
+from PIL import Image
+
 from utils import Result, serve, static, load
 
 from . import settings
@@ -42,9 +44,10 @@ def _get_index_file(index_path: Union[str, Path]
     return Result(
         err=f'Could not find file ({index_path})').wrap_err(FileNotFoundError)
 
+
 def _load_array(manifest_data, arr_name, processor=None):
     if (not manifest_data[arr_name] and
-        manifest_data.get(f'{arr_name}_path', False)):
+            manifest_data.get(f'{arr_name}_path', False)):
         try:
             icons_path = _get_index_file(manifest_data[f'{arr_name}_path'])
             icons_path = icons_path.unwrap()
@@ -75,8 +78,29 @@ def manifest():
     def processor(item):
         if 'type' not in item:
             item['type'] = static.mime_type(item['src'])
-        return item
 
+        if 'sizes' not in item:
+            img = Image.open(str(static.path(item['src'])))
+            item['sizes'] = img.size
+
+        sizes = item['sizes']
+        if isinstance(sizes, dict):
+            w, h = None, None
+            for name in {'w', 'width'}:
+                if name in sizes:
+                    w = sizes[name]
+                    break
+            for name in {'h', 'height'}:
+                if name in sizes:
+                    h = sizes[name]
+                    break
+            if None not in {w, h}:
+                sizes = w, h
+        if isinstance(sizes, (list, tuple)):
+            w, h = sizes
+            item['sizes'] = f'{w}x{h}'
+
+        return item
 
     manifest_data = _load_array(manifest_data, 'icons', processor=processor)
     manifest_data = _load_array(
