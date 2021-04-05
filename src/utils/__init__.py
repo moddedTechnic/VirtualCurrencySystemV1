@@ -1,8 +1,15 @@
 
-class Result:
+from typing import Generic, Optional, TypeVar
+
+
+Ok = TypeVar('Ok')
+Err = TypeVar('Err')
+
+
+class Result(Generic[Ok, Err]):
     'Stores a result, either ok or error'
 
-    def __init__(self, *, ok=None, err=None):
+    def __init__(self, *, ok: Optional[Ok] = None, err: Optional[Err] = None):
         self.ok = ok
         self.err = err
 
@@ -11,9 +18,13 @@ class Result:
 
     def __repr__(self):
         return f'{self.__class__.__qualname__}(ok={self.ok}, err={self.err})'
-    
+
     def __str__(self):
-        return f'{self.__class__.__name__}(' + (f'ok={self.ok}' if self else f'err={self.err}') + ')'
+        return (
+            f'{self.__class__.__name__}(' +
+            (f'ok={self.ok}' if self else f'err={self.err}')
+            + ')'
+        )
 
     def unwrap(self):
         if self:
