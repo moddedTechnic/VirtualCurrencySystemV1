@@ -13,7 +13,6 @@ Note: it would ideally watch all json files not in node modules, but
 import os
 import signal
 import sys
-from pathlib import Path
 
 from django.core.management.commands import runserver
 from django.utils import autoreload
@@ -26,7 +25,6 @@ def _run_with_reloader(main_func, *args, **kwargs):
         if os.environ.get(autoreload.DJANGO_AUTORELOAD_ENV) == 'true':
             reloader = autoreload.get_reloader()
             # reloader.watch_dir()
-            path = Path(__file__).parent.parent.parent.parent / 'static'
             for item in settings.RELOAD_ITEMS:
                 reloader.watch_dir(*item)
             autoreload.logger.info(
@@ -41,6 +39,8 @@ def _run_with_reloader(main_func, *args, **kwargs):
 
 
 class Command(runserver.Command):
+    default_port = '80'
+    
     def run(self, **options):
         '''Run the server, using the autoreloader if needed.'''
         use_reloader = options['use_reloader']
