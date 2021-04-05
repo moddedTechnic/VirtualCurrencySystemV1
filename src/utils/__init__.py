@@ -26,7 +26,7 @@ class Result(Generic[Ok, Err]):
             + ')'
         )
 
-    def unwrap(self):
+    def unwrap(self) -> Ok:
         if self:
             return self.ok
         raise self.err
