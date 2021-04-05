@@ -13,7 +13,7 @@ from main import settings
 from . import Result
 
 
-def path(filename: Union[str, Path]) -> Result:
+def path(filename: Union[str, Path]) -> Result[Path, FileNotFoundError]:
     if isinstance(filename, str):
         filename = filename.strip('/')
     for directory in settings.STATICFILES_DIRS:
