@@ -20,9 +20,13 @@ def static_file(
         fpath: Path = static.path(filename).unwrap()
     except FileNotFoundError as e:
         return Result(err=e)
-    with fpath.open('r') as f:
-        data = f.read()
     content_type = static.mime_type(fpath)
+    if content_type.split('/')[0] in {'image', 'font'}:
+        with fpath.open('rb') as f:
+            data = f.read()
+    else:
+        with fpath.open('r') as f:
+            data = f.read()
     return Result(ok=(data, fpath, content_type))
 
 def json_file(filename: Union[str, Path]) -> Result[dict, FileNotFoundError]:
