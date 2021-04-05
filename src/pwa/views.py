@@ -51,22 +51,34 @@ def _load_array(manifest_data, arr_name, processor=None):
         try:
             path = _get_index_file(manifest_data[f'{arr_name}_path'])
             path = path.unwrap()
-        except FileNotFoundError as e:
-            print('Error loading manifest:', e)
-        else:
-            suffix = path.suffix
-            if suffix == '.json':
-                items = load.json_file(path).unwrap()
+        except FileNotFoundError:
+            try:
+                path: Path = static.path(manifest_data[f'{arr_name}_path']).unwrap()
+                manifest_data[arr_name] = [
+                    '/' + Path(*item.parts[item.parts.index('static'):]).as_posix()
+                    for item in path.glob('**/*')
+                    if not item.stem.startswith('_')
+                ]
                 if processor:
-                    manifest_data[arr_name] = [
-                        processor(item, directory=path.parent) for item in items]
-                else:
-                    manifest_data[arr_name] = items
+                    manifest_data[arr_name] = [processor(item, directory=path) for item in manifest_data[arr_name]]
+                return manifest_data
+            except FileNotFoundError as e:
+                print('Error loading manifest:', e)
+                return manifest_data
+        
+        suffix = path.suffix
+        if suffix == '.json':
+            items = load.json_file(path).unwrap()
+            if processor:
+                manifest_data[arr_name] = [
+                    processor(item, directory=path.parent) for item in items]
             else:
-                print(
-                    'Error loading manifest:'
-                    f' Unknown {arr_name} path suffix ({suffix})'
-                )
+                manifest_data[arr_name] = items
+        else:
+            print(
+                'Error loading manifest:'
+                f' Unknown {arr_name} path suffix ({suffix})'
+            )
     return manifest_data
 
 
@@ -82,7 +94,7 @@ def manifest():
         parts = directory.parts
         idx = parts.index('static')
         parts = parts[idx:]
-        directory = Path(*parts).as_posix()
+        directory = '/' + Path(*parts).as_posix()
 
         src: str = item['src']
         if src.startswith('./'):
