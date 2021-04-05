@@ -16,6 +16,7 @@ MANIFEST_DATA = {
     'theme_color': '#000000',
     'display': 'standalone',
     'shortcuts': [],
+    'screenshots_path': '/screenshots',
     'screenshots': []
 }
 MANIFEST_FILE = False
