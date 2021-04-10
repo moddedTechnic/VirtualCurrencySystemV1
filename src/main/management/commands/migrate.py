@@ -23,7 +23,7 @@ class Command(management.BaseCommand):
         parser.add_argument(
             '--dry-run', action='store_true',
             help='Just show what migrations would be made; don\'t actually '
-            'write them.',
+                'write them.',
         )
         parser.add_argument(
             '--merge', action='store_true',
@@ -47,7 +47,8 @@ class Command(management.BaseCommand):
         )
         parser.add_argument(
             '--check', action='store_true', dest='check_changes',
-            help='Exit with a non-zero status if model changes are missing migrations.',
+            help='Exit with a non-zero status if model changes are missing '
+                'migrations.',
         )
         # endregion
 
@@ -64,7 +65,8 @@ class Command(management.BaseCommand):
         parser.add_argument(
             '--database',
             default=DEFAULT_DB_ALIAS,
-            help='Nominates a database to synchronize. Defaults to the \'default\' database.',
+            help='Nominates a database to synchronize. Defaults to the '
+                '\'default\' database.',
         )
         parser.add_argument(
             '--fake', action='store_true',
@@ -72,9 +74,10 @@ class Command(management.BaseCommand):
         )
         parser.add_argument(
             '--fake-initial', action='store_true',
-            help='Detect if tables already exist and fake-apply initial migrations if so. Make sure '
-                 'that the current database schema matches your initial migration before using this '
-                 'flag. Django will only check for an existing table name.',
+            help='Detect if tables already exist and fake-apply initial '
+                'migrations if so. Make sure that the current database schema '
+                'matches your initial migration before using this flag. Django'
+                ' will only check for an existing table name.',
         )
         parser.add_argument(
             '--plan', action='store_true',
