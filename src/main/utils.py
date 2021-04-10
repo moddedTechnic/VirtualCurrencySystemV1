@@ -1,5 +1,7 @@
+'Some utility functions for the Main module'
+
 from functools import wraps
-from typing import Callable
+from typing import Any, Callable, Optional
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import HttpResponse
 
@@ -14,8 +16,11 @@ class RenderData:
     Stores:
     - context
     '''
-    def __init__(self, *, context=None) -> None:
+
+    def __init__(self, *args, context=None) -> None:
         self.context = context or {}
+        for arg in args:
+            self += arg
 
     def dict(self):
         return {'context': self.context}
@@ -26,6 +31,11 @@ class RenderData:
             context.update(other.context)
             return RenderData(context=context)
 
+    def __iadd__(self, other):
+        result = self + other
+        if isinstance(result, RenderData):
+            self.context = result.context
+
 
 class Context(RenderData):
     def __init__(self, **context) -> None:
@@ -35,28 +45,51 @@ class Context(RenderData):
 class Title(Context):
     def __init__(self, title) -> None:
         super().__init__(title=title)
+        self.__title = title
+
+    def __str__(self) -> str:
+        return f'{self.__class__.__qualname__}(\'{self.__title}\')'
 
 
-def renders(template_name: str) -> Callable[
-        [Callable[[WSGIRequest], RenderData]],
-        Callable[[WSGIRequest], HttpResponse]
-    ]:
-    def wrapper(
-            func: Callable[[WSGIRequest], RenderData]
-        ) -> Callable[[WSGIRequest], HttpResponse]:
+class Renders:
+    '''A decorator to that makes the generic case of a view which renders a
+    template simpler to implement
+    '''
+
+    def __init__(self, template_name: Optional[str] = None, **kwargs: Any):
+        self.template_name = template_name or 'base.html'
+        self.kwargs = kwargs
+
+    def __call__(self, func: Callable[[WSGIRequest], RenderData]) -> \
+            Callable[[WSGIRequest], HttpResponse]:
         @wraps(func)
-        def wrapped(request: WSGIRequest) -> HttpResponse:
+        def wrapper(request: WSGIRequest) -> HttpResponse:
             render_data = func(request)
             render_data += Context(
                 request=request,
                 user=request.user,
-                load_service_worker=pwa_settings.LOAD_SERVICE_WORKER
+                laod_service_worker=pwa_settings.LOAD_SERVICE_WORKER
             )
             return render(
                 request,
-                template_name=template_name,
-                **render_data.dict()
+                template_name=self.template_name,
+                **render_data.dict(),
+                **self.kwargs
             )
-        return wrapped
-    return wrapper
-    
+        return wrapper
+
+
+class View:
+    'A class to make creating static views easy'
+
+    #pylint: disable=keyword-arg-before-vararg
+    def __init__(self, template_name: Optional[str] = None, *render_data_args, **render_data_kwargs):
+        self.template_name = template_name
+        self.render_data = RenderData(*render_data_args, **render_data_kwargs)
+
+    def __call__(self, request: WSGIRequest) -> HttpResponse:
+        return render(
+            request,
+            template_name=self.template_name,
+            **self.render_data.dict()
+        )
