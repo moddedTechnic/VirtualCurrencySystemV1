@@ -5,9 +5,7 @@ from typing import Any, Callable, Optional
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import HttpResponse
 
-from django.shortcuts import render
-
-from pwa import settings as pwa_settings
+from django.template.response import TemplateResponse
 
 
 class RenderData:
@@ -66,14 +64,9 @@ class Renders:
         @wraps(func)
         def wrapper(request: WSGIRequest) -> HttpResponse:
             render_data = func(request)
-            render_data += Context(
-                request=request,
-                user=request.user,
-                laod_service_worker=pwa_settings.LOAD_SERVICE_WORKER
-            )
-            return render(
+            return TemplateResponse(
                 request,
-                template_name=self.template_name,
+                self.template_name,
                 **render_data.dict(),
                 **self.kwargs
             )
@@ -92,8 +85,8 @@ class View:
         self.render_data = RenderData(*render_data_args, **render_data_kwargs)
 
     def __call__(self, request: WSGIRequest) -> HttpResponse:
-        return render(
+        return TemplateResponse(
             request,
-            template_name=self.template_name,
+            self.template_name,
             **self.render_data.dict()
         )
