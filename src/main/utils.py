@@ -83,7 +83,10 @@ class View:
     'A class to make creating static views easy'
 
     #pylint: disable=keyword-arg-before-vararg
-    def __init__(self, template_name: Optional[str] = None, *render_data_args, **render_data_kwargs):
+    def __init__(self,
+        template_name: Optional[str] = None,
+        *render_data_args, **render_data_kwargs
+    ):
         self.template_name = template_name
         self.render_data = RenderData(*render_data_args, **render_data_kwargs)
 
