@@ -1,3 +1,4 @@
+'A collection of utility functions'
 
 from typing import Generic, Optional, TypeVar
 
