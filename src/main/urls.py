@@ -17,6 +17,6 @@ urlpatterns = [
     path('', include('pwa.urls')),
     path('', include('users.urls')),
     path('static', include('main.static')),
-    path('', View('index.html', Title('VCS'))),
-    path('about', View('about.html', Title('About'))),
+    path('', View('index.html', Title('VCS')), name='index'),
+    path('about', View('about.html', Title('About')), name='about'),
 ]
