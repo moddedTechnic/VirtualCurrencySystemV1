@@ -19,6 +19,7 @@ MIME_TYPES = {
     'txt': 'text/plain',
 
     'png': 'image/png',
+    'svg': 'image/svg+xml',
 
     'ttf': 'font/ttf',
     'woff': 'font/woff',
