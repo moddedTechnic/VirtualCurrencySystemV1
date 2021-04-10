@@ -16,6 +16,9 @@ from . import Result
 def path(filename: Union[str, Path]) -> Result[Path, FileNotFoundError]:
     if isinstance(filename, str):
         filename = filename.strip('/')
+        if filename.startswith('static'):
+            filename = filename[len('static'):]
+        filename = filename.strip('/')
     for directory in settings.STATICFILES_DIRS:
         fpath: Path = directory / filename
         if fpath.exists():
