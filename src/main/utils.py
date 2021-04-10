@@ -35,6 +35,7 @@ class RenderData:
         result = self + other
         if isinstance(result, RenderData):
             self.context = result.context
+        return self
 
 
 class Context(RenderData):
