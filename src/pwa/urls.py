@@ -27,4 +27,6 @@ if settings.MANIFEST:
         path('manifest', views.manifest()),
         path('apple-touch-icon.png', views.apple_touch_icon()),
         path('apple-touch-icon', views.apple_touch_icon()),
+        path('apple-touch-icon-precomposed.png', views.apple_touch_icon()),
+        path('apple-touch-icon-precomposed', views.apple_touch_icon()),
     ]
