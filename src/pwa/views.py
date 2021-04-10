@@ -53,19 +53,24 @@ def _load_array(manifest_data, arr_name, processor=None):
             path = path.unwrap()
         except FileNotFoundError:
             try:
-                path: Path = static.path(manifest_data[f'{arr_name}_path']).unwrap()
+                path: Path = static.path(
+                    manifest_data[f'{arr_name}_path']).unwrap()
                 manifest_data[arr_name] = [
-                    '/' + Path(*item.parts[item.parts.index('static'):]).as_posix()
+                    '/' +
+                    Path(*item.parts[item.parts.index('static'):]).as_posix()
                     for item in path.glob('**/*')
                     if not item.stem.startswith('_')
                 ]
                 if processor:
-                    manifest_data[arr_name] = [processor(item, directory=path) for item in manifest_data[arr_name]]
+                    manifest_data[arr_name] = [
+                        processor(item, directory=path)
+                        for item in manifest_data[arr_name]
+                    ]
                 return manifest_data
             except FileNotFoundError as e:
                 print('Error loading manifest:', e)
                 return manifest_data
-        
+
         suffix = path.suffix
         if suffix == '.json':
             items = load.json_file(path).unwrap()
