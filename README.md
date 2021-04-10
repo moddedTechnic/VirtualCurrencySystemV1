@@ -3,7 +3,7 @@ A Virtual Currency System which enables users to gain and trade a virtual curren
 
 ## Installation
 
-To install the VCS (mainly for testing), first either download and unzip the ZIP file or
+To install VCS (mainly for testing), first either download and unzip the ZIP file or
 `git clone` the repository.
 You'll need [Python 3.9](https://python.org) installed, and to get the
 dependencies, run `pip install django`.
@@ -15,7 +15,7 @@ python manange.py migrate
 ```
 to set up the repository.
 Finally, to run the project, run `python manage.py runserver` (from the `src` directory).
-A local server should be started on `localhost:8080`.
+A local server should have been started on `localhost:8080`.
 
 ## Links
 - [Python unittest](https://docs.python.org/3/library/unittest.html)
