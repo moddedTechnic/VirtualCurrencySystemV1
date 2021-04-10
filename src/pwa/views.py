@@ -87,10 +87,10 @@ def _load_array(manifest_data, arr_name, processor=None):
     return manifest_data
 
 
-def manifest():
+def generate_manifest():
     manifest_data: dict[str, Any] = settings.MANIFEST_DATA.copy()
     if manifest_data['use_file']:
-        return serve.static_file(manifest_data['filename'])
+        return load.static_file(manifest_data['filename']).unwrap()
 
     def processor(item, directory: Path, **_):
         if isinstance(item, str):
@@ -140,11 +140,21 @@ def manifest():
     manifest_data = _load_array(manifest_data, 'icons', processor=processor)
     manifest_data = _load_array(
         manifest_data, 'screenshots', processor=processor)
+    manifest_data['primary_icon'] = manifest_data.get('primary_icon') or \
+        (
+            len(manifest_data.get('icons', [])) and
+            manifest_data.get('icons')[0]
+        ) or {}
 
     manifest_data = _strip_keys(
         manifest_data, 'use_file', 'filename', 'icons_path', 'screenshots_path')
+    return manifest_data
 
-    return serve.json(manifest_data)
+def manifest():
+    return serve.json(generate_manifest())
+
+def apple_touch_icon():
+    return serve.static_file(generate_manifest()['primary_icon']['src'])
 
 
 __all__ = ['manifest']

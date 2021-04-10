@@ -25,4 +25,6 @@ if settings.MANIFEST:
     urlpatterns += [
         path('manifest.json', views.manifest()),
         path('manifest', views.manifest()),
+        path('apple-touch-icon.png', views.apple_touch_icon()),
+        path('apple-touch-icon', views.apple_touch_icon()),
     ]
