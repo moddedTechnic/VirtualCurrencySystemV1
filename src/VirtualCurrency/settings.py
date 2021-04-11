@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+<<<<<<< HEAD
+=======
+    # 'django.contrib.staticfiles',
+>>>>>>> a2c333bc34061aeb3197058f65fa55258b92df1a
     'django.contrib.humanize',
 
     'main.apps.MainConfig',
