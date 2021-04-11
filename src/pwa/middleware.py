@@ -17,7 +17,6 @@ class PWASettingsMiddleware:
     def __init__(self, get_response: Callable[[WSGIRequest], Any]):
         print(f'Added middleware {self.__class__.__qualname__}')
         self.get_response = get_response
-        self.printed = False
 
     def __call__(self, request: WSGIRequest) -> Any:
         response = self.get_response(request)
