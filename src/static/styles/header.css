@@ -7,8 +7,7 @@ header {
 }
 
 header nav {
-  background: #2f3640;
-  padding: .5vh 2.5vw;
+  padding: 0.5vh 2.5vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -22,10 +21,23 @@ header nav {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  z-index: 10;
 }
 
 header nav ul {
   list-style-type: none;
+  position: fixed;
+  top: -231px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 101vw;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: rgba(220, 221, 225, 0.25);
+  -webkit-transition: top 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: top 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -46,12 +58,16 @@ header nav ul li {
   width: 100%;
   text-align: center;
   padding: 10px;
-  display: none;
+  display: block;
 }
 
 header nav ul li a {
   display: block;
   padding: 15px 5px;
+}
+
+header nav ul li:not(:last-child) {
+  border-top: 1px solid rgba(220, 221, 225, 0.6);
 }
 
 header nav ul li.button {
@@ -62,7 +78,7 @@ header nav ul li.button {
 }
 
 header nav ul li.button a {
-  border-radius: .5em;
+  border-radius: 0.5em;
 }
 
 header nav ul li.button.secondary {
@@ -75,15 +91,69 @@ header nav ul li a:hover::after {
   color: #dcdde1;
 }
 
-header nav ul.active li {
-  display: block;
-}
-
 header nav #nav-toggle {
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;
-  font-size: 20px;
+}
+
+header nav #nav-toggle span {
+  display: block;
+  position: relative;
+  top: .6em;
+}
+
+header nav #nav-toggle span, header nav #nav-toggle span::before, header nav #nav-toggle span::after {
+  width: 1.65em;
+  height: 3px;
+  background: #dcdde1;
+  border-radius: 3px;
+  -webkit-transition-property: -webkit-transform opacity background-color;
+  transition-property: -webkit-transform opacity background-color;
+  transition-property: transform opacity background-color;
+  transition-property: transform opacity background-color, -webkit-transform opacity background-color;
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+}
+
+header nav #nav-toggle span::before, header nav #nav-toggle span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+header nav #nav-toggle span::before {
+  bottom: 8px;
+}
+
+header nav #nav-toggle span::after {
+  top: 8px;
+}
+
+header nav.active ul {
+  top: 0;
+}
+
+header nav.active #nav-toggle span {
+  background-color: transparent;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+header nav.active #nav-toggle span::before {
+  -webkit-transform: translateY(8px) rotate(-45deg);
+          transform: translateY(8px) rotate(-45deg);
+}
+
+header nav.active #nav-toggle span::after {
+  -webkit-transform: translateY(-8px) rotate(45deg);
+          transform: translateY(-8px) rotate(45deg);
+}
+
+header nav.active #nav-toggle span::before, header nav.active #nav-toggle span::after {
+  background-color: #f5f6fa;
 }
 
 header nav a {
