@@ -151,10 +151,34 @@ main {
 				font-style: italic;
 				color: #dcdde1;
 				margin-top: 1em;
+				max-width: 80ch;
+				line-height: 1.5rem;
 
-				em {
+				a {
 					color: #f5f6fa;
 					font-style: normal;
+					font-weight: 600;
+					text-decoration-color: rgba($color: #000000, $alpha: 0);
+
+					&:hover {
+						text-decoration-color: #f5f6fa;
+						text-decoration-style: dashed;
+					}
+				}
+			}
+
+			cite {
+				font-size: 1.5rem;
+				
+				a {
+					color: #f5f6fa;
+					text-decoration-color: rgba($color: #000000, $alpha: 0);
+
+					&:hover {
+						font-weight: 600;
+						text-decoration-color: #f5f6fa;
+						text-decoration-style: dashed;
+					}
 				}
 			}
 		}
@@ -210,7 +234,7 @@ main {
 				right: 3em;
 
 				button {
-					$arrow-size: .75em;
+					$arrow-size: 0.75em;
 					padding: $arrow-size;
 					border-width: 0 $arrow-size $arrow-size 0;
 

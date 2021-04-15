@@ -182,11 +182,41 @@ main article#slide-2a blockquote {
   font-style: italic;
   color: #dcdde1;
   margin-top: 1em;
+  max-width: 80ch;
+  line-height: 1.5rem;
 }
 
-main article#slide-2a blockquote em {
+main article#slide-2a blockquote a {
   color: #f5f6fa;
   font-style: normal;
+  font-weight: 600;
+  -webkit-text-decoration-color: rgba(0, 0, 0, 0);
+          text-decoration-color: rgba(0, 0, 0, 0);
+}
+
+main article#slide-2a blockquote a:hover {
+  -webkit-text-decoration-color: #f5f6fa;
+          text-decoration-color: #f5f6fa;
+  -webkit-text-decoration-style: dashed;
+          text-decoration-style: dashed;
+}
+
+main article#slide-2a cite {
+  font-size: 1.5rem;
+}
+
+main article#slide-2a cite a {
+  color: #f5f6fa;
+  -webkit-text-decoration-color: rgba(0, 0, 0, 0);
+          text-decoration-color: rgba(0, 0, 0, 0);
+}
+
+main article#slide-2a cite a:hover {
+  font-weight: 600;
+  -webkit-text-decoration-color: #f5f6fa;
+          text-decoration-color: #f5f6fa;
+  -webkit-text-decoration-style: dashed;
+          text-decoration-style: dashed;
 }
 
 main article#slide-2b {
