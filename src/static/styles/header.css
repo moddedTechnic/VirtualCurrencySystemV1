@@ -101,6 +101,7 @@ header nav #nav-toggle span {
   display: block;
   position: relative;
   top: .6em;
+  outline: none;
 }
 
 header nav #nav-toggle span, header nav #nav-toggle span::before, header nav #nav-toggle span::after {
