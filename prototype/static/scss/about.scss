@@ -119,7 +119,7 @@ main {
 
 		&#slide-1 {
 			background-image: linear-gradient(
-				right,
+				to right,
 				rgba(#4cd137, 0.75),
 				#192a56 65%
 			);
@@ -130,7 +130,11 @@ main {
 		}
 
 		&#slide-2 {
-			background-image: linear-gradient(left, rgba(#487eb0, 0.75), #192a56 65%);
+			background-image: linear-gradient(
+				to left,
+				rgba(#487eb0, 0.75),
+				#192a56 65%
+			);
 
 			h1 {
 				font-size: 64px;
@@ -139,7 +143,7 @@ main {
 
 		&#slide-2a {
 			background-image: linear-gradient(
-				right,
+				to right,
 				rgba(#487eb0, 0.75),
 				#192a56 65%
 			);
@@ -169,7 +173,7 @@ main {
 
 			cite {
 				font-size: 1.5rem;
-				
+
 				a {
 					color: #f5f6fa;
 					text-decoration-color: rgba($color: #000000, $alpha: 0);
@@ -184,7 +188,7 @@ main {
 		}
 
 		&#slide-2b {
-			background-image: linear-gradient(left, rgba(#487eb0, 0.75), #192a56 65%);
+			background-image: linear-gradient(to left, rgba(#487eb0, 0.75), #192a56 65%);
 			position: absolute;
 			left: 200vw;
 			top: 100vh;
