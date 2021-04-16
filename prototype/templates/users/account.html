@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'styles/account.css' %}" />
+
+    <section id="overview">
+        <h1>Hello there, <span>{{ user.first_name }} {{ user.last_name }}</span>.</h1>
+        <p>You have <span>{{ balance|intcomma }}</span> IPEPs.</p>
+    </section>
+
+    <section id="transactions">
+        <h2>Transactions</h2>
+        <table>
+            <thead>
+                <td>Sender / Recipient</td>
+                <td colspan="2">Amount</td>
+                <td>Date</td>
+            </thead>
+            {% for transaction in recent_transactions %}
+                <tr class="{% if transaction.to_me %} to-me {% else %} from-me {% endif %}">
+                    {% if transaction.to_me %}
+                        <td>{{ transaction.other_name }} / Me</td>
+                    {% else %}
+                        <td>Me / {{ transaction.other_name }}</td>
+                    {% endif %}
+                    <td>
+                        <i class="fas {% if transaction.to_me %} fa-caret-up {% else %} fa-caret-down {% endif %}"></i>
+                    </td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.date.date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+{% endblock content %}

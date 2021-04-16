@@ -1,0 +1,85 @@
+@import 'fonts';
+
+main {
+	section {
+		margin-bottom: 5vh;
+	}
+
+	#overview {
+		h1 {
+			font-family: $heading-font;
+
+			span {
+				font-family: $body-font;
+				font-weight: 300;
+				font-style: oblique;
+				padding-left: 0.25rem;
+                white-space: nowrap;
+			}
+		}
+
+		p {
+			font-size: 1.25rem;
+			margin-left: 1rem;
+			padding: 0.25rem;
+
+			span {
+				font-size: 1.6rem;
+				font-family: $number-font;
+				font-style: oblique;
+			}
+		}
+	}
+
+	#transactions {
+        h2 {
+            font-family: $heading-font;
+        }
+
+		i {
+			&.fa-caret-up {
+				color: #44bd32;
+			}
+			&.fa-caret-down {
+				color: #e84118;
+			}
+		}
+
+		table {
+            border-collapse: collapse;
+            
+            td {
+                padding: 0.2rem 0.25rem;
+            }
+
+			thead {
+				font-weight: 600;
+				border-bottom: 1px solid #718093;
+
+				td:not(:last-of-type) {
+					border-right: 1px solid #718093;
+					padding-right: 0.25rem !important;
+				}
+			}
+
+			tr {
+				td {
+                    &:not(:last-of-type):not(:nth-of-type(2)) {
+                        border-right: 1px solid #718093;
+					}
+                    
+					&:nth-of-type(2) {
+                        padding-right: 0;
+					}
+				}
+
+				&.to-me {
+					background-color: rgba($color: #44bd32, $alpha: 0.25);
+				}
+				&.from-me {
+					background-color: rgba($color: #e84118, $alpha: 0.25);
+				}
+			}
+		}
+	}
+}

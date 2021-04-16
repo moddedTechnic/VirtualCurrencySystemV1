@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static navigation %}
+
+{% block content %}
+	<link rel="stylesheet" href="{% static 'styles/about.css' %}">
+	<article id="slide-1">
+		<h1>VCS</h1>
+		<h2>A Virtual Currency System for LGS</h2>
+		{% controls 'down' %}
+	</article>
+	<article id="slide-2">
+		<h1>Virtual Currency</h1>
+		<h2>What is it?</h2>
+		{% controls 'up' 'down' 'right' %}
+	</article>
+	<article id="slide-2a">
+		<h1>A Virtual Currency is...</h1>
+		<blockquote cite="https://en.wikipedia.org/wiki/Virtual_currency">
+			a type of unregulated, decentralized,
+			<a href="https://en.wikipedia.org/wiki/Digital_currency">digital currency</a>,
+			which is issued and usually controlled by its developers and used and accepted among the members of a specific
+			<a href="https://en.wikipedia.org/wiki/Virtual_community">virtual community</a>.
+			In 2014, the <a href="https://en.wikipedia.org/wiki/European_Banking_Authority">European Banking Authority</a>
+			defined virtual currency as "a digital representation of value that is neither issued by a central bank or a
+			public authority, nor necessarily attached to a
+			<a href="https://en.wikipedia.org/wiki/Fiat_currency">fiat currency</a>, but is accepted by
+			<a href="https://en.wikipedia.org/wiki/Natural_person">natural</a> or
+			<a href="https://en.wikipedia.org/wiki/Legal_personality">legal persons</a> as a means of payment and can be
+			transferred, stored or traded electronically". By contrast, a digital currency that is issued by a central bank
+			is defined as "<a href="https://en.wikipedia.org/wiki/Digital_Fiat_Currency">central bank digital currency</a>".
+		</blockquote>
+		<cite>- <a href="https://en.wikipedia.org/wiki/Virtual_currency">Wikipedia</a></cite>
+		
+		{% controls 'left' 'right' %}
+	</article>
+	<article id="slide-2b">
+		<h1>This means that...</h1>
+		{% controls 'left' %}
+	</article>
+	{% for i in '56789'|make_list %}
+		<article id="slide-{{i}}">
+			Thing {{i}}
+			{% controls 'up' 'down' %}
+		</article>
+	{% endfor %}
+	<article id="slide-10">
+		Thing 10
+		{% controls 'up' %}
+	</article>
+
+	<script src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+	<script>
+		const main = $('main')
+		const mainPosition = [0,0]
+
+		$('.controls').each(function() {
+			$(this).children().each(function() {
+				const $this = $(this)
+				if (!$this.is('button')) return;
+				if ($this.attr('disabled') !== undefined) return;
+
+				const direction = [0, 0];
+				if ($this.hasClass('up')) direction[1] = 1;
+				else if ($this.hasClass('down')) direction[1] = -1;
+				else if ($this.hasClass('left')) direction[0] = -1;
+				else if ($this.hasClass('right')) direction[0] = 1;
+				
+				$this.click(e => {
+					e.preventDefault()
+					mainPosition[0] += direction[0]
+					mainPosition[1] += direction[1]
+					const left = Math.floor(mainPosition[0]) * -100
+					const top = Math.floor(mainPosition[1]) * +100
+					main.css({
+						left: left + 'vw',
+						top: top + 'vh',
+					})
+				})
+			})
+		})
+	</script>
+{% endblock content %}
