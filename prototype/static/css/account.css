@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
+main section {
+  margin-bottom: 5vh;
+}
+main #overview h1 {
+  font-family: "Kiwi Maru", Calibri, "Trebuchet MS", sans-serif;
+}
+main #overview h1 span {
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 300;
+  font-style: oblique;
+  padding-left: 0.25rem;
+  white-space: nowrap;
+}
+main #overview p {
+  font-size: 1.25rem;
+  margin-left: 1rem;
+  padding: 0.25rem;
+}
+main #overview p span {
+  font-size: 1.6rem;
+  font-family: "Overlock", cursive;
+  font-style: oblique;
+}
+main #transactions h2 {
+  font-family: "Kiwi Maru", Calibri, "Trebuchet MS", sans-serif;
+}
+main #transactions i.fa-caret-up {
+  color: #44bd32;
+}
+main #transactions i.fa-caret-down {
+  color: #e84118;
+}
+main #transactions table {
+  border-collapse: collapse;
+}
+main #transactions table td {
+  padding: 0.2rem 0.25rem;
+}
+main #transactions table thead {
+  font-weight: 600;
+  border-bottom: 1px solid #718093;
+}
+main #transactions table thead td:not(:last-of-type) {
+  border-right: 1px solid #718093;
+  padding-right: 0.25rem !important;
+}
+main #transactions table tr td:not(:last-of-type):not(:nth-of-type(2)) {
+  border-right: 1px solid #718093;
+}
+main #transactions table tr td:nth-of-type(2) {
+  padding-right: 0;
+}
+main #transactions table tr.to-me {
+  background-color: rgba(68, 189, 50, 0.25);
+}
+main #transactions table tr.from-me {
+  background-color: rgba(232, 65, 24, 0.25);
+}
+
+/*# sourceMappingURL=account.css.map */
