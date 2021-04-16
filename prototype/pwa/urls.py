@@ -13,11 +13,11 @@ urlpatterns = [
     path('robots', serve.static_file('robots.txt')),
     path(
         'service-worker.js',
-        serve.static_file('scripts/service-worker/worker.js')
+        serve.static_file('js/service-worker/worker.js')
     ),
     path(
         'service-worker',
-        serve.static_file('scripts/service-worker/worker.js')
+        serve.static_file('js/service-worker/worker.js')
     ),
 ]
 
