@@ -131,3 +131,4 @@ dmypy.json
 .vscode
 
 _secrets*
+/prototype/static/scss/CACHE/

@@ -1,4 +1,5 @@
-@import 'fonts';
+// @use 'fonts';
+@import './_fonts.scss';
 
 header {
 	position: fixed;
@@ -162,7 +163,7 @@ main {
 					color: #f5f6fa;
 					font-style: normal;
 					font-weight: 600;
-					text-decoration-color: rgba($color: #000000, $alpha: 0);
+					text-decoration-color: rgba(#000000, 0);
 
 					&:hover {
 						text-decoration-color: #f5f6fa;
@@ -176,7 +177,7 @@ main {
 
 				a {
 					color: #f5f6fa;
-					text-decoration-color: rgba($color: #000000, $alpha: 0);
+					text-decoration-color: rgba(#000000, 0);
 
 					&:hover {
 						font-weight: 600;
@@ -192,6 +193,21 @@ main {
 			position: absolute;
 			left: 200vw;
 			top: 100vh;
+
+			p {
+				color: #dcdde1;
+				margin-top: 1em;
+				max-width: 80ch;
+				line-height: 1.5rem;
+			}
+		}
+
+		&#slide-4 {
+		    background-image: linear-gradient(
+				to left,
+				rgba(#487eb0, 0.75),
+				#192a56 65%
+			);
 		}
 	}
 }

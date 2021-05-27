@@ -1,4 +1,4 @@
-@import 'fonts';
+@import './_fonts.scss';
 
 main {
 	section {
@@ -74,10 +74,10 @@ main {
 				}
 
 				&.to-me {
-					background-color: rgba($color: #44bd32, $alpha: 0.25);
+					background-color: rgba(#44bd32, 0.25);
 				}
 				&.from-me {
-					background-color: rgba($color: #e84118, $alpha: 0.25);
+					background-color: rgba(#e84118, 0.25);
 				}
 			}
 		}

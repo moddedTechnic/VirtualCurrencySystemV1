@@ -1,4 +1,4 @@
-@import 'fonts';
+@import './_fonts.scss';
 
 @mixin centered {
 	position: absolute;
@@ -69,7 +69,7 @@ main {
 
 				&:hover {
 					// width: 240px;
-					border-color: rgba($color: #44bd32, $alpha: 0.75);
+					border-color: rgba(#44bd32, 0.75);
 				}
 
 				&:focus {

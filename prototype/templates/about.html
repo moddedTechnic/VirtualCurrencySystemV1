@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-{% load static navigation %}
+{% load static navigation compress %}
 
 {% block content %}
-	<link rel="stylesheet" href="{% static 'css/about.css' %}">
+	{% compress css %}
+		<link rel="stylesheet" href="{% static 'scss/about.scss' %}" type="text/x-scss">
+	{% endcompress %}
 	<article id="slide-1">
 		<h1>VCS</h1>
 		<h2>A Virtual Currency System for LGS</h2>
@@ -35,7 +37,19 @@
 	</article>
 	<article id="slide-2b">
 		<h1>This means that...</h1>
+		<p>
+			it is like a standard currency, but its value is not tied to it, so it's value can be defined by whoever distributes it.
+			Because its value isn't tied to standard currency
+		</p>
 		{% controls 'left' %}
+	</article>
+	<article id="slide-3">
+		<h1>Lorem Ipsum.</h1>
+		{% controls 'up' 'down' %}
+	</article>
+	<article id="slide-4">
+		<h1>Name Ideas</h1>
+		{% controls 'up' 'down' %}
 	</article>
 	{% for i in '56789'|make_list %}
 		<article id="slide-{{i}}">

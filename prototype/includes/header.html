@@ -1,16 +1,12 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/header.css' %}" defer />
+{% load static compress %}
+
+{% compress css %}
+	<link rel="stylesheet" href="{% static 'scss/header.scss' %}" defer type="text/x-scss" />
+{% endcompress %}
 
 <header>
-	<link
-		rel="stylesheet"
-		href="{% static 'font-awesome/latest/css/all.min.css' %}"
-		defer
-	/>
-
 	<nav>
         <a id="logo" href="/">VCS</a>
-		<!-- <a id="nav-toggle" href="#"><i class="fas fa-bars"></i></a> -->
 		<a id="nav-toggle" href="#"><span></span></a>
 		<ul>
 			<li><a href="/about">About</a></li>
@@ -32,12 +28,6 @@
 		/* Event Listener */
 		toggle.addEventListener('click', () => {
 			/* Toggle mobile menu */
-			// if (menu.classList.contains('active'))
-			// 	// adds the menu (hamburger) icon
-			// 	toggle.querySelector('i').classList.replace('fa-times', 'fa-bars')
-			// else
-			// 	// adds the close (x) icon
-			// 	toggle.querySelector('i').classList.replace('fa-bars', 'fa-times')
 			menu.classList.toggle('active')
 		}, false)
 	</script>

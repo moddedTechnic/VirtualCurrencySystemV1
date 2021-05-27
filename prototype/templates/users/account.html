@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-{% load static humanize %}
+{% load static humanize compress %}
 
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'scss/account.scss' %}" type="text/x-scss" />
+    {% endcompress %}
 
     <section id="overview">
         <h1>Hello there, <span>{{ user.first_name }} {{ user.last_name }}</span>.</h1>

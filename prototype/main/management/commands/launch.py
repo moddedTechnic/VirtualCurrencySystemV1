@@ -19,6 +19,7 @@ from django.utils import autoreload
 
 from main import settings
 
+
 def _run_with_reloader(main_func, *args, **kwargs):
     signal.signal(signal.SIGTERM, lambda *args: sys.exit(0))
     try:
@@ -39,8 +40,9 @@ def _run_with_reloader(main_func, *args, **kwargs):
 
 
 class Command(runserver.Command):
+    'The command class'
     default_port = '80'
-    
+
     def run(self, **options):
         '''Run the server, using the autoreloader if needed.'''
         use_reloader = options['use_reloader']
